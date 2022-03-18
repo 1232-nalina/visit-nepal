@@ -24,7 +24,7 @@
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password" required name="password">
+                        <input type="password" class="password" placeholder="Enter your password" required name="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -64,7 +64,7 @@
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" id="txtPassword" class="password" placeholder="Create a password" required name="password">
+                        <input type="password" id="txtPassword" class="password" placeholder="Create a password" required name="password" onkeyup="CheckPasswordStrength(this.value)" />
                         <span id="password_strength"></span>
                         <i class="uil uil-lock icon"></i>
                     </div>
@@ -96,9 +96,10 @@
             </div>
         </div>
     </div>
+        
 </body>
 
-   <script>
+   <script type="text/javascript">
     const container = document.querySelector(".container"),
   pwShowHide = document.querySelectorAll(".showHidePw"),
   pwFields = document.querySelectorAll(".password"),
@@ -127,6 +128,7 @@ pwShowHide.forEach(eyeIcon =>{
 })
 
 
+
 // js code to appear signup and login form
 signUp.addEventListener("click", ( )=>{
     container.classList.add("active");
@@ -134,64 +136,12 @@ signUp.addEventListener("click", ( )=>{
 login.addEventListener("click", ( )=>{
     container.classList.remove("active");
 });
-
-       $("#txtPassword").bind("keyup", function () {
-            //TextBox left blank.
-            if ($(this).val().length == 0) {
-                $("#password_strength").html("");
-                return;
-            }
-        
- 
-            //Regular Expressions.
-            var regex = new Array();
-            regex.push("[A-Z]"); //Uppercase Alphabet.
-            regex.push("[a-z]"); //Lowercase Alphabet.
-            regex.push("[0-9]"); //Digit.
-            regex.push("[$@$!%*#?&]"); //Special Character.
- 
-            var passed = 0;
- 
-            //Validate for each Regular Expression.
-            for (var i = 0; i < regex.length; i++) {
-                if (new RegExp(regex[i]).test($(this).val())) {
-                    passed++;
-                }
-            }
- 
- 
-            //Validate for length of Password.
-            if (passed > 2 && $(this).val().length > 8) {
-                passed++;
-            }
- 
-            //Display status.
-            var color = "";
-            var strength = "";
-            switch (passed) {
-                case 0:
-                case 1:
-                    strength = "Weak";
-                    color = "red";
-                    break;
-                case 2:
-                    strength = "Good";
-                    color = "darkorange";
-                    break;
-                case 3:
-                case 4:
-                    strength = "Strong";
-                    color = "green";
-                    break;
-                case 5:
-                    strength = "Very Strong";
-                    color = "darkgreen";
-                    break;
-            }
-            $("#password_strength").html(strength);
-            $("#password_strength").css("color", color);
-        });
-
+const password = document.getElementById('password')
+const form = document.getElementById('form')
+form.addEventListener('login', (e)=>{
+e.preventDefault()
+})
 </script>
+
 
 </html>
