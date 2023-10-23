@@ -93,7 +93,7 @@ function check_input($data) {
             <span>confirm password :</span>
             <input type="password" id="txtPassword2" placeholder="confirm your password" name="confirmpass" required>
          </div>
-         <div class="g-recaptcha" data-sitekey="6LcnADMgAAAAAKmNJi4Faw3yKOw8wujYbrZ_BkPV"></div>
+         <div class="g-recaptcha" data-sitekey=""></div>
                                 <br>
         
         
