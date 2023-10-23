@@ -1,0 +1,45 @@
+<form action="" id="book-status">
+    <input type="hidden" name="id" value="<?php echo $id ?>">
+<div class="form-group">
+        <label for="" class="control-label">Status</label>
+        <select name="status" id="" class="select custom-select">
+            <option value="0" <?php echo $status == 0 ? "selected" : '' ?>>Pending</option>
+            <option value="1" <?php echo $status == 1 ? "selected" : '' ?>>Confimed</option>
+            <option value="2" <?php echo $status == 2 ? "selected" : '' ?>>Cancelled</option>
+            <option value="3" <?php echo $status == 3 ? "selected" : '' ?>>Done</option>
+        </select>
+    </div>
+</form>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Update</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+</div>
+<script>
+    $(function(){
+        $('#book-status').submit(function(e){
+            e.preventDefault();
+            start_loader()
+            $.ajax({
+                url:_base_url_+"classes/Master.php?f=update_book_status",
+                method:"POST",
+                data:$(this).serialize(),
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                },
+                success:function(resp){
+                    if(typeof resp == 'object' && resp.status == 'success'){
+                        location.reload()
+                    }else{
+                        console.log(resp)
+                        alert_toast("an error occured",'error')
+                    }
+                    end_loader()
+                }
+            })
+        })
+    })
+</script>
